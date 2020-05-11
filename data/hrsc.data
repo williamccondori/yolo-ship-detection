@@ -1,0 +1,5 @@
+classes=1
+train=data/hrsc-train.txt
+valid=data/hrsc-test.txt
+names=data/hrsc.names
+backup=backup/

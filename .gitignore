@@ -1,1 +1,6 @@
+.vscode/
+
 darknet
+
+backend/
+venv/
