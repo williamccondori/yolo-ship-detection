@@ -4,3 +4,5 @@ darknet
 
 backend/
 venv/
+
+data/*.txt

@@ -49,26 +49,25 @@ def main():
             # Create yolo annotation file.
             yolo_annotation = open(f'{output_folder}/{file_name}.txt', 'w')
 
-            objects_root = root.find('HRSC_Objects')
+            objects = root.findall('object')
 
-            if objects_root:
-                objects = objects_root.findall('HRSC_Object')
+            for object in objects:
 
-                for object in objects:
-                    x_min = object.find('box_xmin')
-                    y_min = object.find('box_ymin')
-                    x_max = object.find('box_xmax')
-                    y_max = object.find('box_ymax')
+                bndbox = object.find('bndbox')
+                x_min = bndbox.find('xmin')
+                y_min = bndbox.find('ymin')
+                x_max = bndbox.find('xmax')
+                y_max = bndbox.find('ymax')
 
-                    # Convert bounding box to yolo format.
-                    hrsc_box = (int(x_min.text), int(x_max.text),
-                                int(y_min.text), int(y_max.text))
-                    yolo_box = convert_to_yolo(
-                        int(image_file.width), int(image_file.height), hrsc_box)
+                # Convert bounding box to yolo format.
+                hrsc_box = (int(x_min.text), int(x_max.text),
+                            int(y_min.text), int(y_max.text))
+                yolo_box = convert_to_yolo(
+                    int(image_file.width), int(image_file.height), hrsc_box)
 
-                    # Save yolo coordinates.
-                    yolo_annotation.write(
-                        f'{object_class} {yolo_box[0]} {yolo_box[1]} {yolo_box[2]} {yolo_box[3]}\n')
+                # Save yolo coordinates.
+                yolo_annotation.write(
+                    f'{object_class} {yolo_box[0]} {yolo_box[1]} {yolo_box[2]} {yolo_box[3]}\n')
             yolo_annotation.close()
 
 
