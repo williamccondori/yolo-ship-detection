@@ -1,0 +1,5 @@
+classes=1
+train=data/airbus-train.txt
+valid=data/airbus-test.txt
+names=data/airbus.names
+backup=backup/
